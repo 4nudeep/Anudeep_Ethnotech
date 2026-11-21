@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Donation Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Blood Donation Prediction</h1>
+        <p>Check your likelihood of donating blood</p>
+
+        <form action="/predict" method="POST">
+            <div><label>Months Since Last Donation:</label><input type="number" step="any" name="last_donation" required></div>
+            <div><label>Total Donations:</label><input type="number" name="total_donations" required></div>
+            <div><label>Total Blood Donated (ml):</label><input type="number" step="any" name="total_blood_donated" required></div>
+            <div><label>Body Weight (kg):</label><input type="number" step="any" name="body_weight" required></div>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>
+

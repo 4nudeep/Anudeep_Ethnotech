@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Donation Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Blood Donation Prediction</h1>
+
+        <h2>Prediction Result</h2>
+
+        <h2>{{ prediction }}</h2>
+
+        <p>Model Accuracy: {{ accuracy }}%</p>
+
+        <a href="/">Go Back</a>
+    </div>
+
+</body>
+</html>

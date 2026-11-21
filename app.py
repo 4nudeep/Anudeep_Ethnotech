@@ -49,9 +49,9 @@ model = DecisionTreeClassifier(
 
 model.fit(X_train, Y_train)
 
-# Calculate accuracy
+# Calculate accuracy (FIXED)
 y_test_pred = model.predict(X_test)
-accuracy = accuracy_score(Y_test, y_test) * 100
+accuracy = accuracy_score(Y_test, y_test_pred) * 100
 
 
 @app.route('/')
@@ -69,6 +69,7 @@ def predict():
         )
         body_weight = float(request.form['body_weight'])
 
+        # Validate input
         if min(
             last_donation,
             total_donations,
@@ -77,7 +78,7 @@ def predict():
         ) < 0:
             raise ValueError("Values cannot be negative.")
 
-        # Predict using DataFrame
+        # Prepare input data
         input_data = pd.DataFrame(
             [[
                 last_donation,
@@ -88,6 +89,7 @@ def predict():
             columns=features
         )
 
+        # Make prediction
         prediction = model.predict(input_data)[0]
 
         if prediction == 1:
@@ -108,6 +110,11 @@ def predict():
         ), 400
 
 
+# Run application
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(
+        host='0.0.0.0',
+        port=port,
+        debug=False
+    )
